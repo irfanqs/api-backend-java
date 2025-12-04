@@ -38,6 +38,13 @@ public class CategoryController {
         return ResponseEntity.ok(ApiResponse.success(categories));
     }
     
+    @GetMapping("/{id}")
+    @Operation(summary = "Get Category by ID", description = "Mendapatkan kategori berdasarkan ID")
+    public ResponseEntity<ApiResponse<CategoryResponse>> getCategoryById(@PathVariable Long id) {
+        CategoryResponse category = categoryService.getCategoryById(id);
+        return ResponseEntity.ok(ApiResponse.success(category));
+    }
+    
     @PostMapping
     @Operation(summary = "Create Category", description = "Membuat kategori baru (Admin only)")
     public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(

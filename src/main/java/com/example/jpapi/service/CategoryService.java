@@ -23,6 +23,12 @@ public class CategoryService {
             .collect(Collectors.toList());
     }
     
+    public CategoryResponse getCategoryById(Long id) {
+        Category category = categoryRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+        return CategoryResponse.fromCategory(category);
+    }
+    
     @Transactional
     public CategoryResponse createCategory(CategoryRequest request) {
         if (categoryRepository.existsByName(request.getName())) {
